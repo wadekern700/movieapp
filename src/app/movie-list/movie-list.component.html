@@ -1,0 +1,37 @@
+<div class="container ">
+  <div class="row mt-5 mb-3 ">
+    <div class=" col-12  text-center">
+      <h4 class="text-primary">Checkout our top {{totalMovies}} popular movies</h4>
+      <pagination-controls responsive="true" (pageChange)="pageChange($event)"></pagination-controls>
+    </div>
+    <div class="col-12 mb-5 d-flex justify-content-center">
+      Show Fav Movies
+      <input type="checkbox" class="mt-2 ml-1" [checked]="showFavs" (change)="showFavs = !showFavs" />
+    </div>
+  </div>
+  <div class="row">
+    <div class=" col-12 col-lg-4 mb-3"
+      *ngFor="let movie of movies | favouritesFilter :showFavs| paginate: { itemsPerPage: 20, currentPage: page, totalItems: 10000}">
+      <div class="card h-100 mt-5 pt-2">
+        <img class="card-img-top pt-5" (click)="goToMovieDetails(movie.id)"
+          src='https://image.tmdb.org/t/p/w200{{movie.poster_path}}' class="h-auto w-50 ml-auto mr-auto"
+          alt="Card image cap">
+        <div class="card-body" (click)="goToMovieDetails(movie.id)">
+          <h5 class="card-title">{{movie.title}}</h5>
+          <p class="card-text">{{movie.overview}}</p>
+          <p class="card-text">Rating: {{movie.vote_average}}</p>
+          <p class="card-text">Release: {{movie.release_date}}</p>
+          <p class="card-text">Production Country: {{movie.countryOfProduction}}</p>
+          <p class="card-text">Directed By: {{movie.director}}</p>
+
+          Featuring:
+          <span class="mt-1" *ngFor="let actor of movie.actors" class="card-text">{{actor.name + ' '}}</span>
+        </div>
+        <div class="footer mb-2 ml-2 ml-auto mr-auto">
+          <button type="button" class="btn btn-primary p-3" (click)="addToFavourites(movie)">Add to
+            Favourites</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

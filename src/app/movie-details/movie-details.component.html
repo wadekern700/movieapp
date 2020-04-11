@@ -1,0 +1,8 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <button class="btn btn-link " (click)="goHome()">Back To Movie List</button>
+      <div *ngFor="let item of generateArray() ">{{item.key}}: {{item.value}}<div>
+        </div>
+      </div>
+    </div>
